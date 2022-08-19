@@ -15,7 +15,6 @@ services:
       - ./docker/logs/nginx:/var/logs/nginx:rw
     depends_on:
       - php
-      - postgres
     networks:
       - app
   
@@ -31,19 +30,4 @@ services:
     networks:
       - app
 
-  postgres:
-    image: postgres:12.3-alpine
-    container_name: ${APP_NAME}_postgres
-    restart: unless-stopped
-    ports:
-      - "5433:5432"
-    volumes:
-      - ./docker/postgres:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: ${DB_USERNAME}
-      POSTGRES_PASSWORD: ${DB_PASSWORD}
-      POSTGRES_DB: ${DB_DATABASE}
-      POSTGRES_HOST_AUTH_METHOD: "trust"
-    networks:
-      - app
     
