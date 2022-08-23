@@ -19,8 +19,27 @@ class TodolistController extends Controller
 		$data = Todolist::create($request->validated());
 		return response()->json([
 			'success' => true,
-			'message' => 'Todolist Berhasil ditambahkan!',
+			'message' => 'Todolist Berhasil Ditambahkan!',
 			'data' => $data,
 		], 201);
+	}
+
+	public function update(Todolist $todolist, TodolistRequest $request) 
+	{
+		$todolist->update($request->validated());
+		return response()->json([
+			'success' => true,
+			'message' => 'Todolist Berhasil Diubah!',
+			'data' => $todolist,
+		], 200);
+	}
+
+	public function destroy(Todolist $todolist) 
+	{
+		$todolist->delete();
+		return response()->json([
+			'success' => true,
+			'message' => 'Todolist Berhasil Dihapus!'
+		], 200);
 	}
 }
